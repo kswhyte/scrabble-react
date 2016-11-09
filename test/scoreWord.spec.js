@@ -1,5 +1,5 @@
 import { assert } from 'chai'
-const scoreWord = require('../lib/components/scoreWord.js')
+const scoreWord = require('../lib/components/scoreWord')
 
 describe('letterScores | Unit Tests', function() {
   context('letterScores as an object', function() {
@@ -24,14 +24,52 @@ describe('letterScores | Unit Tests', function() {
   })
   context('scoreWord as a method', function() {
     it('is a function', function() {
-
       assert.isFunction(scoreWord);
     })
-    it('can score a word with no multiplier', function(){
-      assert.equal(scoreWord('hi'), 5);
+  })
+  context('can score words with NO multiplier', function() {
+    it('can score a word with NO multiplier', function(){
+      assert.equal(scoreWord('HI'), 5);
     })
+    it('can score another word with no multiplier', function(){
+      assert.equal(scoreWord('WORLD'), 9);
+    })
+    it('can score another word with no multiplier', function(){
+      assert.equal(scoreWord('QUIXOTRY'), 27);
+    })
+    it('can score another word with no multiplier', function(){
+      assert.equal(scoreWord(''), 0);
+    })
+    it('can score another word with no multiplier', function(){
+      assert.equal(scoreWord(null), 0);
+    })
+  })
+  context('can score words with a multiplier', function() {
     it('can score a word with a multiplier', function(){
-      assert.equal(scoreWord('hi', 3), 15);
+      assert.equal(scoreWord('HI', 3), 15);
+    })
+    it('can score another word with a multiplier', function(){
+      assert.equal(scoreWord('HI', 3), 15);
+    })
+    it('can score another word with a multiplier', function(){
+      assert.equal(scoreWord('QUARTZY', 3), 84);
+    })
+    it('can score another word with no multiplier', function(){
+      assert.equal(scoreWord('', 2), 0);
+    })
+    it('can score another word with no multiplier', function(){
+      assert.equal(scoreWord(null, 2), 0);
+    })
+  })
+  context('can score different words with different multipliers', function() {
+    it('can score a word with different multipliers', function(){
+      assert.equal(scoreWord('HI', 2), 10);
+    })
+    it('can score different words with different multipliers', function(){
+      assert.equal(scoreWord('WORLD', 2), 18);
+    })
+    it('can score different words with different multipliers', function(){
+      assert.equal(scoreWord('QUIZZIFY', 2), 82);
     })
   })
 })
