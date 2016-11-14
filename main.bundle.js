@@ -29393,8 +29393,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _scoreWord = __webpack_require__(470);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29403,28 +29401,140 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var scoreWord = __webpack_require__(470);
+
 	var Application = function (_Component) {
 	  _inherits(Application, _Component);
 
 	  function Application() {
 	    _classCallCheck(this, Application);
 
-	    return _possibleConstructorReturn(this, (Application.__proto__ || Object.getPrototypeOf(Application)).call(this));
+	    var _this = _possibleConstructorReturn(this, (Application.__proto__ || Object.getPrototypeOf(Application)).call(this));
+
+	    _this.state = {
+	      word: '',
+	      wordList: []
+	    };
+	    return _this;
 	  }
 
 	  _createClass(Application, [{
+	    key: 'updateWord',
+	    value: function updateWord(e) {
+	      this.setState({
+	        word: e.target.value
+	      });
+	    }
+	  }, {
+	    key: 'setInitialState',
+	    value: function setInitialState() {
+	      this.setState({
+	        word: ''
+	      });
+	    }
+	  }, {
+	    key: 'addWordToWordList',
+	    value: function addWordToWordList() {
+	      this.state.wordList.push({
+	        displayedWord: this.state.word,
+	        displayedScore: scoreWord(this.state.word)
+	      });
+	      this.setState({
+	        wordList: this.state.wordList
+	      });
+	      this.setInitialState();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
+	      var score = scoreWord(this.state.word);
+
+	      var wordAndScore = this.state.wordList.map(function (wordObj, i) {
+	        return _react2.default.createElement(
+	          'li',
+	          {
+	            className: 'word-and-score-displayed',
+	            key: i
+	          },
+	          wordObj.displayedWord,
+	          ' (',
+	          wordObj.displayedScore,
+	          ')'
+	        );
+	      });
+
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'Score your Scrabble Words Here!'
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'scrabble' },
+	            'Scrabble'
+	          ),
+	          ' Word Scorer'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'input-and-counter' },
+	          _react2.default.createElement('input', {
+	            className: 'word-input',
+	            onChange: function onChange(e) {
+	              return _this2.updateWord(e);
+	            },
+	            value: this.state.word
+	          }),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'score' },
+	            ' ',
+	            score,
+	            ' '
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'buttons' },
+	          _react2.default.createElement(
+	            'button',
+	            {
+	              className: 'clear-button',
+	              onClick: function onClick() {
+	                return _this2.setInitialState();
+	              }
+	            },
+	            'Clear Fields'
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            {
+	              className: 'submit-button',
+	              onClick: function onClick() {
+	                return _this2.addWordToWordList();
+	              }
+	            },
+	            'Submit'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'word-and-score-container' },
+	          wordAndScore
+	        )
 	      );
 	    }
 	  }]);
 
 	  return Application;
 	}(_react.Component);
+
+	//create submit button:
+	//appends WORD and SCORE
+
 
 	exports.default = Application;
 
@@ -29444,26 +29554,25 @@
 	  Y: 4, Z: 10
 	};
 
-	function scoreWord(word, multiplier) {
-	  var charArray = word.toUpperCase().trim().split('');
-	  var scoreArray = charArray.map(function (char) {
-	    return letterScores[char];
-	  });
+	function scoreWord(word) {
+	  var multiplier = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
-	  if (multiplier !== null || multiplier !== 0) {
-	    var score = scoreArray.reduce(function (a, b) {
+	  var score = 0;
+	  if (word !== null && word !== '') {
+	    var charArray = word.toUpperCase().trim().split('');
+	    var scoreArray = charArray.map(function (char) {
+	      return letterScores[char];
+	    });
+	    score = scoreArray.reduce(function (a, b) {
 	      return a + b;
 	    });
-	    return score * parseInt(multiplier);
 	  } else {
-	    var _score = scoreArray.reduce(function (a, b) {
-	      return a + b;
-	    });
-	    return _score;
+	    score = 0;
 	  }
+	  return score * parseInt(multiplier);
 	}
 
-	module.exports = { letterScores: letterScores, scoreWord: scoreWord };
+	module.exports = scoreWord;
 
 /***/ },
 /* 471 */
@@ -29500,7 +29609,7 @@
 
 
 	// module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, "body {\n  background-color: #122D42;\n  color: #3DD2CC; }\n\nh1 {\n  font-size: 50px;\n  text-align: center; }\n\n.scrabble {\n  color: #d93b60; }\n\n.input-and-counter {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: row; }\n\n.word-input {\n  font-family: 'Cinzel Decorative', cursive;\n  margin: 15px 10px;\n  padding: 5px 13px;\n  display: block;\n  align-items: center;\n  border: none;\n  text-align: center;\n  font-size: 14px;\n  border-radius: 3px;\n  width: 220px; }\n  .word-input:hover {\n    cursor: pointer;\n    background-color: #3DD2CC;\n    color: #000; }\n\n.word-input:hover {\n  background-color: #CBF9DA; }\n\n.score {\n  font-size: 30px;\n  margin-left: 10px;\n  color: #CBF9DA; }\n\n.clear-button {\n  font-family: 'Cinzel Decorative', cursive;\n  margin: 15px 10px;\n  padding: 5px 13px;\n  display: block;\n  align-items: center;\n  border: none;\n  text-align: center;\n  font-size: 14px;\n  border-radius: 3px;\n  color: #fff;\n  background-color: #3E6B89; }\n  .clear-button:hover {\n    cursor: pointer;\n    background-color: #3DD2CC;\n    color: #000; }\n\n.submit-button {\n  font-family: 'Cinzel Decorative', cursive;\n  margin: 15px 10px;\n  padding: 5px 13px;\n  display: block;\n  align-items: center;\n  border: none;\n  text-align: center;\n  font-size: 14px;\n  border-radius: 3px;\n  background-color: #3E6B89;\n  color: #fff; }\n  .submit-button:hover {\n    cursor: pointer;\n    background-color: #3DD2CC;\n    color: #000; }\n\n.buttons {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: row; }\n\n.word-and-score-container {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column; }\n\n.word-and-score-displayed {\n  color: #CBF9DA;\n  text-decoration: none;\n  list-style-type: none;\n  font-size: 20px;\n  font-family: 'Cinzel Decorative', cursive;\n  margin: 5px auto; }\n\n@media (max-width: 400px) {\n  h1 {\n    font-size: 40px; } }\n", ""]);
 
 	// exports
 

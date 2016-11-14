@@ -31,6 +31,7 @@ export default class Application extends Component {
     this.setState({
       wordList: this.state.wordList
     })
+    this.setInitialState()
   }
 
   render() {
@@ -38,6 +39,7 @@ export default class Application extends Component {
 
     let wordAndScore = this.state.wordList.map((wordObj, i) =>
       <li
+        className='word-and-score-displayed'
         key={i}
       >
         {wordObj.displayedWord} ({wordObj.displayedScore})
@@ -46,21 +48,31 @@ export default class Application extends Component {
 
     return (
       <div>
-        <div>Score your Scrabble Words Here!</div>
-        <input
-          onChange={(e) => this.updateWord(e)}
-          value={this.state.word}
-        />
-        <span> { score } </span>
-        <button
-          onClick={() => this.setInitialState()}
-        >Clear Fields
-        </button>
-        <button
-          onClick={() => this.addWordToWordList()}
-        >Submit
-        </button>
-        <ul>
+        <h1><span className='scrabble'>Scrabble</span> Word Scorer</h1>
+
+        <div className='input-and-counter'>
+          <input
+            className='word-input'
+            onChange={(e) => this.updateWord(e)}
+            value={this.state.word}
+          />
+          <span className='score'> { score } </span>
+        </div>
+
+        <div className='buttons'>
+          <button
+            className='clear-button'
+            onClick={() => this.setInitialState()}
+          >Clear Fields
+          </button>
+          <button
+            className='submit-button'
+            onClick={() => this.addWordToWordList()}
+          >Submit
+          </button>
+        </div>
+
+        <ul className='word-and-score-container'>
           { wordAndScore }
         </ul>
       </div>

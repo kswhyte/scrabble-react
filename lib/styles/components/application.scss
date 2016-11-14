@@ -1,1 +1,72 @@
-@import '../config/all'
+@import '../config/all';
+
+body {
+  background-color: $background-color;
+  color: $hoverAndWord-color;
+}
+
+h1 {
+  font-size: 50px;
+  text-align: center;
+}
+
+.scrabble {
+  color: rgb(217, 59, 96)
+}
+
+.input-and-counter {
+  @include container;
+  flex-direction: row;
+}
+
+.word-input {
+  @include button-style;
+  width: 220px;
+}
+.word-input:hover {
+  background-color: $button-style;
+}
+
+.score {
+  font-size: 30px;
+  margin-left: 10px;
+  color: $button-style;
+}
+
+.clear-button {
+  @include button-style;
+  color: #fff;
+  background-color: $button-color;
+}
+
+.submit-button {
+  @include button-style;
+  background-color: $button-color;
+  color: #fff;
+}
+
+.buttons {
+  @include container;
+  flex-direction: row;
+}
+
+.word-and-score-container {
+  @include container;
+  flex-direction: column;
+}
+
+.word-and-score-displayed {
+  color: $button-style;
+  text-decoration: none;
+  list-style-type: none;
+  font-size: 20px;
+  font-family: 'Cinzel Decorative', cursive;
+  margin: 5px auto;
+  // text-align: left;
+}
+
+@media (max-width: 400px) {
+  h1 {
+    font-size: 40px;
+  }
+}
