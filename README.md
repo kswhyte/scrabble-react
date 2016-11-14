@@ -1,31 +1,5 @@
-# React Starter Kit
+# Scrabble Word Scorer - ReactJS
 
-To install the dependencies:
+In this mini app, you are able to enter any word and get a live update of the Scrabble score for your word. You are able to word input and score, and save words and respective scores the the page without a refresh. This was a small app built during an assessment in Module 2 of the Front-End Engineering program at Turing: School of Software & Design.
 
-```
-npm install
-```
-
-To fire up a development server:
-
-```
-npm start
-```
-
-Once the server is running, you can visit:
-
-* `http://localhost:8080/webpack-dev-server/` to run your application.
-* `http://localhost:8080/webpack-dev-server/test.html` to run your test suite in the browser.
-
-To build the static files:
-
-```js
-npm run build
-```
-
-
-To run tests in Node:
-
-```js
-npm test
-```
+Score your Scrabble words with ease on this [live version](https://kswhyte.github.io/scrabble-react).
