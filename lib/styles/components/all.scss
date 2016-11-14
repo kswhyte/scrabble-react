@@ -1,11 +1,2 @@
-// @import 'application';
-// @import 'contact';
-// @import 'contact-form';
-// @import 'contact-list';
-// @import 'follow-up-contact-list';
-// @import 'image-upload';
-// @import 'login-logout';
-// @import 'reset';
-// @import 'search-bar';
-
-@import '../config/all'
+@import '../config/all';
+@import 'application';
